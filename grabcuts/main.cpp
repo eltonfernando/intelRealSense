@@ -33,8 +33,8 @@ int main(int argc, char * argv[]) try
     auto erode_less = gen_element(erosion_size);
     auto erode_more = gen_element(erosion_size * 2);
 
-    // The following operation is taking grayscale image,
-    // performs threashold on it, closes small holes and erodes the white area
+    //A operação a seguir está tirando a imagem em tons de cinza,
+    // executa threahold nele, fecha pequenos buracos e corrói a área branca
     auto create_mask_from_depth = [&](Mat& depth, int thresh, ThresholdTypes type)
     {
         threshold(depth, depth, thresh, 255, type);
