@@ -1,0 +1,24 @@
+[
+{
+    "arguments": [
+        "clang++",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-m64",
+        "--target=x86_64-linux-gnu",
+        "-I",
+        "/home/elton/librealsense/examples/rs-save-to-disk",
+        "-I",
+        "/home/elton/MEGA/Projetos/IntelRealSenseEmbrapa/save-to-disk/../../common",
+        "-I",
+        "/home/elton/MEGA/Projetos/IntelRealSenseEmbrapa/save-to-disk/../../third-party",
+        "-I",
+        "/home/elton/MEGA/Projetos/IntelRealSenseEmbrapa/save-to-disk/../../third-party/tclap/include",
+        "-x",
+        "c++",
+        "/home/elton/MEGA/Projetos/IntelRealSenseEmbrapa/save-to-disk/rs-save-to-disk.cpp"
+    ],
+    "directory": "/home/elton/MEGA/Projetos/IntelRealSenseEmbrapa/build-save-to-disk-Desktop_Qt_5_12_0_GCC_64bit-Default",
+    "file": "/home/elton/MEGA/Projetos/IntelRealSenseEmbrapa/save-to-disk/rs-save-to-disk.cpp"
+}
+]
