@@ -8,17 +8,6 @@
 #include <pcl/filters/passthrough.h>
 #include <pcl/io/pcd_io.h>
 
-// PCL Headers
-//#include <pcl/io/pcd_io.h>
-//#include <pcl/point_types.h>
-//#include <pcl/filters/passthrough.h>
-//#include <pcl/common/common_headers.h>
-//#include <pcl/features/normal_3d.h>
-
-//#include <pcl/console/parse.h>
-
-
-
 //#include <pcl/io/point_cloud_image_extractors.h>
 using namespace std;
 using namespace cv;
@@ -69,18 +58,18 @@ int main()try
         int64_t temp_frame=0;
         while (waitKey(1) !=27 ){
 
-
             if(pipe->poll_for_frames(&data)){
                 // cout <<"posicao" <<playback.get_position() <<endl;
 
-                depth = data.get_depth_frame().apply_filter(color_map);
+                depth = data.get_depth_frame();//.apply_filter(color_map);
                 color = data.get_color_frame();
 
                 // para salvar pcd colorido
-                //    pc.map_to(color);
-                //   points = pc.calculate(depth);
+                    pc.map_to(color);
+                   points = pc.calculate(depth);
 
-               // depth = color_map.process(data);//.colorize(depth);
+              //  depth = depth.apply_filter(color_map);
+
                 playback.pause();
 
                 // cout <<"hora color" <<color.get_timestamp()<<endl; // hora de captura milsegundo
@@ -109,6 +98,7 @@ int main()try
                 case 83: cout << "proximo"<<endl;
                     auto t= std::chrono::nanoseconds(1);
                     temp_frame= depth.get_timestamp();
+                 //case 27:
 
                 }
 
@@ -117,13 +107,14 @@ int main()try
             }else cout <<"sem fram"<<endl;
         }
     }
+   // depth= color_map.process(data);// para csv
     // Record per-frame metadata for UVC streams
                 std::stringstream csv_file;
                 csv_file << "rs-save-to-disk-output-" << depth.get_profile().stream_name()
                          << "-metadata.csv";
     savle_metadata_to_csv_png(depth,csv_file.str());
 
-    // salve_cloud_color(points,color);
+     salve_cloud_color(points,color);
     pipe->stop();//fecha o arquivo
 
     cout << "fim" << endl;
@@ -198,7 +189,7 @@ void converte_point_cloud_to_png( pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud){
         }
     }
     cv::imwrite("image.png", image);
-    imshow("image do",image);
+   // imshow("image do",image);
 
 }
 void salve_cloud_color(const rs2::points& points, const rs2::video_frame& color){
